@@ -1,0 +1,13 @@
+{
+  "name": "@dynamic-mfs/react-webpack",
+  "scripts": {
+    "start": "concurrently \"cd host; npm run start\" \"cd remote; npm run start\""
+  },
+  "author": {
+    "name": "diogoparente",
+    "email": "hello@diogocodes.com"
+  },
+  "devDependencies": {
+    "concurrently": "^7.1.0"
+  }
+}

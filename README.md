@@ -12,6 +12,6 @@ This means that, without re-deploying your host app, or "smashing" your previous
 
 ### Examples
 
-Each proposal for solving this approach will be documented inside each `README.md` under the `/examples` folder with instructions and documentation.
+Each proposal for solving this approach should be documented inside each project in the `README.md` file folder with instructions and documentation.
 
 You can find the template to follow in `README_TEMPLATE.md`

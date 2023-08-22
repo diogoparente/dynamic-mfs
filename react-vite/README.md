@@ -13,7 +13,6 @@ Run `pnpm install`, then `pnpm start`. This will build and serve both `host` and
 - HOST: [localhost:3000](http://localhost:3000/)
   - REMOTE in HOST:
     - BASE_ROUTE[http://localhost:3000/apps/remote](http://localhost:3000/apps/remote)
-    - BASE_ROUTE with dynamic params [http://localhost:3000/apps/remote/1](http://localhost:3000/apps/remote/1)
 - REMOTE: [localhost:3001](http://localhost:3001/)
 
 `CTRL + C` can only stop the host server. You can run `pnpm stop` to stop all services.

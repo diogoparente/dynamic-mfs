@@ -1,8 +1,13 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RemoteApp from "remoteApp/App";
 import Home from "./pages";
-
+import { Link, Routes, Route } from "react-router-dom";
 import Wrapper from "./components/wrapper";
+
+const StyledLink = ({ to, children }) => (
+  <Link style={{ margin: "1rem" }} to={to}>
+    {children}
+  </Link>
+);
 
 const pages = import.meta.glob("./pages/**/*.jsx", { eager: true });
 
@@ -26,16 +31,19 @@ for (const path of Object.keys(pages)) {
   });
 }
 
-const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/apps/*", element: <RemoteApp /> },
-]);
-
 const App = () => {
   return (
     <Wrapper>
-      I'm running inside localhost:3000
-      <RouterProvider router={router} />
+      <div style={{ marginBottom: "1rem" }}>
+        Hello, I'm the host app!
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/apps/remote">Remote App</StyledLink>
+        <StyledLink to="/apps/remote/nested">Nested Page</StyledLink>
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/apps/*" element={<RemoteApp />} />
+      </Routes>
     </Wrapper>
   );
 };

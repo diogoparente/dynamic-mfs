@@ -1,9 +1,38 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const DotenvPlugin = require("dotenv-webpack");
-
 const deps = require("./package.json").dependencies;
+
 module.exports = () => ({
+  plugins: [
+    new ModuleFederationPlugin({
+      name: "remote",
+      filename: "remoteEntry.js",
+      remotes: {},
+      exposes: {
+        "./App": "./src/App",
+      },
+      shared: {
+        ...deps,
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: deps["react-router-dom"],
+        },
+      },
+    }),
+    new DotenvPlugin(),
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+    }),
+  ],
   output: {
     publicPath: "http://localhost:3001/",
   },
@@ -39,34 +68,4 @@ module.exports = () => ({
       },
     ],
   },
-
-  plugins: [
-    new DotenvPlugin(),
-    new ModuleFederationPlugin({
-      name: "remote",
-      filename: "remoteEntry.js",
-      remotes: {},
-      exposes: {
-        "./App": "./src/App",
-      },
-      shared: {
-        ...deps,
-        react: {
-          singleton: true,
-          requiredVersion: deps.react,
-        },
-        "react-dom": {
-          singleton: true,
-          requiredVersion: deps["react-dom"],
-        },
-        "react-router-dom": {
-          singleton: true,
-          requiredVersion: deps["react-router-dom"],
-        },
-      },
-    }),
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-    }),
-  ],
 });

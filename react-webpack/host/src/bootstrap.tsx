@@ -14,7 +14,7 @@ const Link = ({ to }: { to: string }) => (
 );
 
 const microfrontendUrls = {
-  remote: process.env.REACT_APP_MICROFRONTEND_URL!,
+  remote: process.env.REACT_APP_MICROFRONTEND_BUCKET!,
 };
 
 const container = document.getElementById("app");

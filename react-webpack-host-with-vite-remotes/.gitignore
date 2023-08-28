@@ -1,0 +1,2 @@
+host/public/*
+!host/public/remote.umd.js

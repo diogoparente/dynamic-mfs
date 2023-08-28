@@ -1,18 +1,20 @@
 import { useMicrofrontend } from "../context/micro-frontends.context";
 import useDynamicComponent from "../hooks/use-dynamic-component";
 
-const Microfrontend = ({ microId = "remote" }: { microId: string }) => {
+const Microfrontend = ({ microId }: { microId: string }) => {
   const microfrontend = useMicrofrontend({ id: microId });
-  const scope = microfrontend.scope;
-  const version = microfrontend.version;
+  if (!microfrontend) {
+    return null;
+  }
+
+  const { scope, version } = microfrontend;
 
   const Component = useDynamicComponent({
     scope,
     version,
-    module: "./App",
   });
 
-  return Component ? Component : null;
+  return Component ?? null;
 };
 
 export default Microfrontend;

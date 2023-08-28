@@ -13,10 +13,6 @@ const Link = ({ to }: { to: string }) => (
   </NavLink>
 );
 
-const microfrontendUrls = {
-  remote: process.env.REACT_APP_MICROFRONTEND_BUCKET!,
-};
-
 const container = document.getElementById("app");
 const root = createRoot(container!);
 root.render(
@@ -41,9 +37,11 @@ root.render(
           <Route path="/" element={<div>home page container</div>} />
           <Route
             path="/remote/*"
-            element={
-              <Microfrontend url={microfrontendUrls.remote} microId="remote" />
-            }
+            element={<Microfrontend microId="remote" />}
+          />
+          <Route
+            path="/guilherme/*"
+            element={<Microfrontend microId="guilherme" />}
           />
         </Routes>
       </BrowserRouter>

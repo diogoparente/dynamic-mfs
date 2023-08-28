@@ -3,7 +3,7 @@ import React, { Suspense, lazy, useEffect, useState } from "react";
 export interface ModuleProps {
   scope: string;
   version: string;
-  module: string;
+  module?: string;
   props?: any;
 }
 
@@ -71,7 +71,12 @@ const useDynamicScript = ({ version, scope }: Omit<ModuleProps, "module">) => {
   };
 };
 
-const ModuleLoader = ({ version, module, scope, props }: ModuleProps) => {
+const ModuleLoader = ({
+  version,
+  scope,
+  module = "./App",
+  props,
+}: ModuleProps) => {
   // custom hook to append our target script
   // to the document's head
   const { ready, failed } = useDynamicScript({
